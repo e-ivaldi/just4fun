@@ -8,6 +8,17 @@ public class PlayingWithLambdas {
     apply(() -> 3 - 2);
     apply(() -> 3 / 2);
     apply(() -> 3 % 2);
+
+    System.out.println(String.format("thread: %s", Thread.currentThread().getId()));
+
+    new Thread(
+    // using Runnable as a functional interface
+        () -> System.out.println(String.format("thread: %s", Thread.currentThread().getId()))).start();
+
+    Runnable r = () -> System.out.println(String.format("thread: %s", Thread.currentThread().getId()));
+
+    new Thread(r).start();
+
   }
 
   private static void apply(Operation operation) {
